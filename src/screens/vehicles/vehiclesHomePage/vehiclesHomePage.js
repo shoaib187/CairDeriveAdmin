@@ -7,6 +7,8 @@ import Button from '../../../components/common/button/button';
 import Searchbar from '../../../components/common/searchBar/searchbar';
 import DynamicTable from '../../../components/common/table/table';
 import { COLORS } from '../../../components/constants/colors/colors';
+import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar';
+import SectionInformation from '../../../components/common/sectionInformation/sectionInformation';
 export default function VehiclesHomePage({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -92,23 +94,9 @@ export default function VehiclesHomePage({ navigation }) {
     <SafeAreaProvider style={{ flex: 1 }}>
       <Header title='Assetss' showBackButton showUser={false} onBackPress={() => navigation.goBack()} />
       <ScrollView showsVerticalScrollIndicator={false}>
+        <SectionInformation title='Assets overview' subtitle='Assets you have' />
         <VehicleCard />
-        <View style={{ paddingHorizontal: 12 }}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.sectionTitle}>
-              Assetss ({filteredData.length})
-            </Text>
-            <Button
-              title="Add Vehicle"
-              onPress={() => navigation.navigate("AddVehicle")}
-              variant="primary"
-              size='small'
-              style={{ elevation: 0, borderRadius: 6 }}
-              icon={"add"}
-            />
-          </View>
-          <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        </View>
+        <FilterSearchBar />
         <DynamicTable
           data={filteredData}
           columns={columns}

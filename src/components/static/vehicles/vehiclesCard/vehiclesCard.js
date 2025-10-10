@@ -67,8 +67,7 @@ const DetailRow = ({ label, value, highlight = false }) => (
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 12,
-    padding: 16,
+    paddingHorizontal: 12,
   },
   header: {
     flexDirection: 'row',

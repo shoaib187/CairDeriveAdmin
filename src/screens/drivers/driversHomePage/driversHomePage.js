@@ -8,6 +8,8 @@ import Button from '../../../components/common/button/button';
 import DynamicTable from '../../../components/common/table/table';
 import { COLORS } from '../../../components/constants/colors/colors';
 import { getStatusBackground, getStatusColor } from '../../../utils/services/services';
+import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar';
+import SectionInformation from '../../../components/common/sectionInformation/sectionInformation';
 
 export default function DriversHomePage({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,25 +93,6 @@ export default function DriversHomePage({ navigation }) {
     { key: 'vehicle', label: 'VEHICLE', width: 120 },
   ];
 
-  // useEffect(() => {
-  //   fetchDrivers();
-  // }, []);
-
-  // const fetchDrivers = async () => {
-  //   try {
-  //     const response = await fetch('https://jms-omega.vercel.app/api/company/driver/getalldrivers?page=1&limit=10', {
-  //       method: "GET",
-
-  //     });
-  //     const result = await response.json();
-  //     console.log("res", result)
-
-  //     // setDriversData(result.drivers);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const filteredData = driversData.filter(item =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -137,34 +120,21 @@ export default function DriversHomePage({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header showBackButton={true} title='Drivers' onBackPress={() => navigation.goBack()} />
-      <View style={styles.wrapperContainer}>
-        <DriverStatsCard />
-        <View style={styles.tableHeader}>
-          <Text style={styles.sectionTitle}>
-            Drivers ({filteredData.length})
-          </Text>
-          <Button
-            title="Add Driver"
-            onPress={() => navigation.navigate("AddDriver")}
-            variant="primary"
-            size='small'
-            style={{ elevation: 0, borderRadius: 6 }}
-          />
-        </View>
-        <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <DynamicTable
-          data={filteredData}
-          columns={columns}
-          onDelete={handleDelete}
-          actionButtons={[
-            { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
-            { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
-            { label: 'View', icon: 'eye', color: COLORS.primary, action: 'view' }
-          ]}
-          style={styles.table}
-          maxHeight={400}
-        />
-      </View>
+      <SectionInformation />
+      <DriverStatsCard />
+      <FilterSearchBar />
+      <DynamicTable
+        data={filteredData}
+        columns={columns}
+        onDelete={handleDelete}
+        actionButtons={[
+          { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
+          { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
+          { label: 'View', icon: 'eye', color: COLORS.primary, action: 'view' }
+        ]}
+        style={styles.table}
+        maxHeight={400}
+      />
     </SafeAreaView>
   );
 }

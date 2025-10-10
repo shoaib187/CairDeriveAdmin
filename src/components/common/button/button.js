@@ -6,11 +6,14 @@ import {
   ActivityIndicator,
   View,
   Dimensions,
+  PixelRatio,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { COLORS } from '../../constants/colors/colors';
 
 const { width } = Dimensions.get('window');
+const scale = width / 375; // base iPhone width
+const responsive = (size) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
 
 const Button = ({
   title,
@@ -27,69 +30,71 @@ const Button = ({
   fullWidth = false,
   ...props
 }) => {
+  // 🎨 Define button style variants
   const getVariantStyles = () => {
     const variants = {
       primary: {
-        backgroundColor: COLORS.primary, // deep indigo
+        backgroundColor: COLORS.primary,
         textColor: '#fff',
         borderColor: 'transparent',
       },
       secondary: {
-        backgroundColor: '#E2E8F0', // soft gray
-        textColor: '#1A202C',        // dark gray text
+        backgroundColor: '#E2E8F0',
+        textColor: '#1A202C',
         borderColor: '#CBD5E0',
       },
       success: {
-        backgroundColor: '#38B2AC', // teal
+        backgroundColor: '#38B2AC',
         textColor: '#fff',
         borderColor: 'transparent',
       },
       warning: {
-        backgroundColor: '#F6AD55', // orange
+        backgroundColor: '#F6AD55',
         textColor: '#fff',
         borderColor: 'transparent',
       },
       danger: {
-        backgroundColor: '#E53E3E', // red
+        backgroundColor: '#E53E3E',
         textColor: '#fff',
         borderColor: 'transparent',
       },
       outline: {
         backgroundColor: 'transparent',
-        textColor: '#5A67D8',
-        borderColor: '#5A67D8',
+        textColor: COLORS.primary,
+        borderColor: COLORS.primary,
       },
       ghost: {
         backgroundColor: 'transparent',
-        textColor: '#5A67D8',
+        textColor: COLORS.primary,
         borderColor: 'transparent',
       },
     };
     return variants[variant] || variants.primary;
   };
 
+  // 📏 Define responsive size variations
   const getSizeStyles = () => {
     const sizes = {
       small: {
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        fontSize: 14,
-        iconSize: 16,
-        height: 36,
+        paddingVertical: responsive(6),
+        paddingHorizontal: responsive(12),
+        fontSize: responsive(13),
+        iconSize: responsive(16),
+        height: responsive(36),
       },
       medium: {
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        fontSize: 16,
-        iconSize: 20,
-        height: 48,
+        paddingVertical: responsive(10),
+        paddingHorizontal: responsive(20),
+        fontSize: responsive(15),
+        iconSize: responsive(20),
+        height: responsive(40),
       },
       large: {
-        paddingVertical: 16,
-        paddingHorizontal: 32,
-        fontSize: 18,
-        iconSize: 24,
-        height: 56,
+        paddingVertical: responsive(14),
+        paddingHorizontal: responsive(28),
+        fontSize: responsive(17),
+        iconSize: responsive(24),
+        height: responsive(56),
       },
     };
     return sizes[size] || sizes.medium;
@@ -154,10 +159,10 @@ const Button = ({
     {
       height: sizeStyles.height,
       paddingHorizontal: sizeStyles.paddingHorizontal,
-      borderWidth: variant === 'outline' ? 2 : 0,
+      borderWidth: variant === 'outline' ? 1.5 : 0,
       borderColor: variantStyles.borderColor,
       backgroundColor: variantStyles.backgroundColor,
-      width: fullWidth ? width - 32 : 'auto',
+      width: fullWidth ? width - responsive(32) : 'auto',
       opacity: disabled ? 0.6 : 1,
     },
     variant === 'ghost' && styles.ghostButton,
@@ -181,8 +186,7 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 4,
-    borderRadius: 8
+    borderRadius: responsive(10),
   },
   ghostButton: {
     shadowOpacity: 0,
@@ -198,10 +202,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   iconLeft: {
-    marginRight: 8,
+    marginRight: responsive(8),
   },
   iconRight: {
-    marginLeft: 8,
+    marginLeft: responsive(8),
   },
   loadingContainer: {
     flexDirection: 'row',
@@ -209,125 +213,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   loadingText: {
-    marginLeft: 8,
+    marginLeft: responsive(6),
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: responsive(13),
   },
 });
 
 export default Button;
-
-
-
-// <View style={styles.container}>
-//   {/* Primary Button */}
-//   <Button
-//     title="Primary Button"
-//     onPress={() => console.log('Primary pressed')}
-//     variant="primary"
-//   />
-
-//   {/* Secondary Button */}
-//   <Button
-//     title="Secondary Button"
-//     onPress={() => console.log('Secondary pressed')}
-//     variant="secondary"
-//   />
-
-//   {/* Success Button with Icon */}
-//   <Button
-//     title="Success Button"
-//     onPress={() => console.log('Success pressed')}
-//     variant="success"
-//     icon="check-circle"
-//   />
-
-//   {/* Warning Button */}
-//   <Button
-//     title="Warning Button"
-//     onPress={() => console.log('Warning pressed')}
-//     variant="warning"
-//   />
-
-//   {/* Danger Button */}
-//   <Button
-//     title="Danger Button"
-//     onPress={() => console.log('Danger pressed')}
-//     variant="danger"
-//   />
-
-//   {/* Outline Button */}
-//   <Button
-//     title="Outline Button"
-//     onPress={() => console.log('Outline pressed')}
-//     variant="outline"
-//   />
-
-//   {/* Ghost Button */}
-//   <Button
-//     title="Ghost Button"
-//     onPress={() => console.log('Ghost pressed')}
-//     variant="ghost"
-//   />
-
-//   {/* Button with Right Icon */}
-//   <Button
-//     title="Next Step"
-//     onPress={() => console.log('Next pressed')}
-//     variant="primary"
-//     icon="arrow-forward"
-//     iconPosition="right"
-//   />
-
-//   {/* Loading Button */}
-//   <Button
-//     title="Loading Button"
-//     onPress={() => console.log('Loading pressed')}
-//     variant="primary"
-//     loading={true}
-//   />
-
-//   {/* Disabled Button */}
-//   <Button
-//     title="Disabled Button"
-//     onPress={() => console.log('Disabled pressed')}
-//     variant="primary"
-//     disabled={true}
-//   />
-
-//   {/* Different Sizes */}
-//   <Button
-//     title="Small Button"
-//     onPress={() => console.log('Small pressed')}
-//     variant="primary"
-//     size="small"
-//   />
-
-//   <Button
-//     title="Large Button"
-//     onPress={() => console.log('Large pressed')}
-//     variant="primary"
-//     size="large"
-//   />
-
-//   {/* Full Width Button */}
-//   <Button
-//     title="Full Width Button"
-//     onPress={() => console.log('Full width pressed')}
-//     variant="primary"
-//     fullWidth={true}
-//   />
-
-//   {/* Custom Children */}
-//   <Button
-//     onPress={() => console.log('Custom pressed')}
-//     variant="primary"
-//     style={styles.customButton}
-//   >
-//     <View style={styles.customContent}>
-//       {/* <Icon name="star" size={20} color="#fff" /> */}
-//       <Text style={styles.customText}>Custom Content</Text>
-//       {/* <Icon name="star" size={20} color="#fff" /> */}
-//     </View>
-//   </Button>
-// </View>

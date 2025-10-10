@@ -1,54 +1,70 @@
-import { View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
-import Icon from "react-native-vector-icons/MaterialIcons"
-import { COLORS } from '../../constants/colors/colors'
+import React from 'react';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  PixelRatio,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { COLORS } from '../../constants/colors/colors';
 
-export default function Searchbar({ searchQuery, setSearchQuery }) {
+const { width } = Dimensions.get('window');
+
+// Responsive helpers
+const scale = width / 375; // 375 is base iPhone width
+const responsiveSize = (size) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
+
+export default function Searchbar({
+  searchQuery,
+  setSearchQuery,
+  placeholder = 'Search...',
+}) {
   return (
     <View style={styles.searchContainer}>
       <View style={styles.searchInputContainer}>
-        <Icon name="search" size={20} color="#8E8E93" style={styles.searchIcon} />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search hardware devices..."
+          placeholder={placeholder}
           placeholderTextColor="#8E8E93"
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        {searchQuery.length > 0 && (
+        {searchQuery?.length > 0 && (
           <TouchableOpacity onPress={() => setSearchQuery('')}>
-            <Icon name="close" size={20} color="#8E8E93" />
+            <Icon name="close" size={responsiveSize(20)} color="#8E8E93" />
           </TouchableOpacity>
         )}
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    height: responsiveSize(40),
   },
   searchInputContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    height: 50,
+    backgroundColor: COLORS.white,
+    borderRadius: responsiveSize(8),
+    paddingHorizontal: responsiveSize(14),
+    height: responsiveSize(42),
     borderColor: COLORS.borderColor,
-    borderWidth: 1
+    borderWidth: 1,
   },
   searchIcon: {
-    marginRight: 12,
+    marginRight: responsiveSize(8),
   },
   searchInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: responsiveSize(15),
     color: '#1a1a1a',
+    paddingVertical: 0, // ensures alignment
   },
-
-})
+});

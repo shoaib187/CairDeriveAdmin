@@ -12,6 +12,8 @@ import Searchbar from '../../../components/common/searchBar/searchbar';
 import Button from '../../../components/common/button/button';
 import DynamicTable from '../../../components/common/table/table';
 import { COLORS } from '../../../components/constants/colors/colors';
+import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar';
+import SectionInformation from '../../../components/common/sectionInformation/sectionInformation';
 
 
 
@@ -120,35 +122,21 @@ const CargoHome = ({ navigation }) => {
         onBackPress={() => navigation.goBack()}
       />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.contentInner}>
-          <Searchbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-          <View style={styles.tableHeader}>
-            <Text style={styles.sectionTitle}>
-              Hardware Devices ({filteredData.length})
-            </Text>
-            <Button
-              title="Add Cargo"
-              onPress={() => navigation.navigate("AddCargo")}
-              variant="primary"
-              size='small'
-              style={{ elevation: 0, borderRadius: 6 }}
-              icon={"add"}
-            />
-          </View>
-          <DynamicTable
-            data={filteredData}
-            columns={columns}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onView={onViewDetails}
-            actionButtons={[
-              { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
-              { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
-            ]}
-            style={styles.table}
-            maxHeight={400}
-          />
-        </View>
+        <SectionInformation title="Cargo management" />
+        <FilterSearchBar />
+        <DynamicTable
+          data={filteredData}
+          columns={columns}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onView={onViewDetails}
+          actionButtons={[
+            { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
+            { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
+          ]}
+          style={styles.table}
+          maxHeight={400}
+        />
       </ScrollView>
     </View>
   );
@@ -169,7 +157,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 18,

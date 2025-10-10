@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Button from '../../../../components/common/button/button';
 
-export const ActionButtons = ({ onCancel, onSubmit }) => (
+export const ActionButtons = ({ onCancel, onSubmit, title, showIcon }) => (
   <View style={styles.container}>
     <Button title="Cancel" onPress={onCancel} variant="warning" fullWidth style={[styles.button, { backgroundColor: `#ddd`, }]} textStyle={{ color: "black" }} />
-    <Button title="Add Driver" onPress={onSubmit} variant="primary" icon="person-add" fullWidth style={styles.button} />
+    <Button title={title || "Add Driver"} onPress={onSubmit} variant="primary" icon={showIcon ? "person-add" : null} fullWidth style={styles.button} />
   </View>
 );
 

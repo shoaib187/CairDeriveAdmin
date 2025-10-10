@@ -53,7 +53,7 @@ const Management = ({ navigation }) => {
       icon: 'location-on',
       color: '#5856D6',
       gradient: ['#5856D6', '#4746B5'],
-      screen: 'LocationManagement',
+      screen: 'LocationHomePage',
     },
     {
       id: 6,
@@ -62,7 +62,7 @@ const Management = ({ navigation }) => {
       icon: 'route',
       color: '#AF52DE',
       gradient: ['#AF52DE', '#8E44AD'],
-      screen: 'RouteManagement',
+      screen: 'LocationHomePage',
     },
   ];
 
@@ -105,10 +105,10 @@ const Management = ({ navigation }) => {
               <Icon name="refresh" size={20} color="#34C759" />
               <Text style={styles.actionButtonText}>Sync Data</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton}>
+            {/* <TouchableOpacity style={styles.actionButton}>
               <Icon name="notifications" size={20} color="#FF9500" />
               <Text style={styles.actionButtonText}>Alerts</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </ScrollView>
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#1a1a1a',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   actionButtons: {
     flexDirection: 'row',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     marginHorizontal: 4,
-    shadowColor: '#000',
+    shadowColor: '#ddd',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

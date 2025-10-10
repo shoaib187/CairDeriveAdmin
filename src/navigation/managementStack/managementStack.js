@@ -34,11 +34,13 @@ const ManagementStack = () => {
           headerShown: false,
         }}
       />
-
       {/* Cargo */}
-
       <Stack.Screen name="CargoHomePage" component={screens.CargoHome} />
       <Stack.Screen name="AddCargo" component={screens.AddCargo} />
+      {/* Locations */}
+      <Stack.Screen name="LocationHomePage" component={screens.LocationsHomePage} />
+      <Stack.Screen name="AddLocation" component={screens.AddLocation} />
+      <Stack.Screen name="LocationDetails" component={screens.LocationDetails} />
     </Stack.Navigator>
   )
 }

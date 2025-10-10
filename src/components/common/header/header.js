@@ -17,7 +17,7 @@ const Header = ({
       <View style={styles.leftSection}>
         {showBackButton && (
           <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-            <Icon name="arrow-back" size={20} color={COLORS.white} />
+            <Icon name="arrow-back" size={24} color={COLORS.white} />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: COLORS.primary,
     paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.sm,
+    paddingVertical: SPACING.md,
   },
   leftSection: {
     flexDirection: 'row',

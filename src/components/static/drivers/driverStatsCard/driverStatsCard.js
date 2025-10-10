@@ -1,36 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../../../constants/colors/colors';
 
-const { width } = Dimensions.get('window');
 
 const DriverStatsCard = ({
   stats = { total: 45, available: 28, onRoute: 12 },
-  style = {},
 }) => {
   return (
-    <View style={[styles.container, style]}>
-      <View style={styles.headerText}>
-        <Text style={styles.title}>Drivers Overview</Text>
-        <Text style={styles.subtitle}>Real-time driver statistics</Text>
+    <View style={styles.quickStats} >
+      <View style={styles.quickStatItem}>
+        <Text style={styles.quickStatValue}>{stats.available}</Text>
+        <Text style={styles.quickStatLabel}>Total</Text>
       </View>
-
-      {/* Quick Stats Bar */}
-      <View style={styles.quickStats}>
-        <View style={styles.quickStatItem}>
-          <Text style={styles.quickStatValue}>{stats.available}</Text>
-          <Text style={styles.quickStatLabel}>Total</Text>
-        </View>
-        <View style={styles.quickStatDivider} />
-        <View style={styles.quickStatItem}>
-          <Text style={styles.quickStatValue}>{stats.total - stats.available}</Text>
-          <Text style={styles.quickStatLabel}>Active</Text>
-        </View>
-        <View style={styles.quickStatDivider} />
-        <View style={styles.quickStatItem}>
-          <Text style={styles.quickStatValue}>{stats.onRoute}</Text>
-          <Text style={styles.quickStatLabel}>On Route</Text>
-        </View>
+      <View style={styles.quickStatDivider} />
+      <View style={styles.quickStatItem}>
+        <Text style={styles.quickStatValue}>{stats.total - stats.available}</Text>
+        <Text style={styles.quickStatLabel}>Active</Text>
+      </View>
+      <View style={styles.quickStatDivider} />
+      <View style={styles.quickStatItem}>
+        <Text style={styles.quickStatValue}>{stats.onRoute}</Text>
+        <Text style={styles.quickStatLabel}>On Route</Text>
       </View>
     </View>
   );
@@ -54,6 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 16,
     marginTop: 8,
+    marginHorizontal: 12
   },
   quickStatItem: {
     flex: 1,

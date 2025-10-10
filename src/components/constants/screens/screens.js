@@ -2,6 +2,9 @@ import AddCargo from "../../../screens/cargo/addCargo/addCargo";
 import CargoHome from "../../../screens/cargo/cargoHomePage/cargoHomePage";
 import AddDriver from "../../../screens/drivers/addDriver/addDriver";
 import DriversHomePage from "../../../screens/drivers/driversHomePage/driversHomePage";
+import AddLocation from "../../../screens/locations/addLocation/addLocation";
+import LocationDetails from "../../../screens/locations/locationDetails/locationDetails";
+import LocationsHomePage from "../../../screens/locations/locationsHomePage/locationsHomePage";
 import AddDevice from "../../../screens/management/addDevice/addDevice";
 import HardwareManagement from "../../../screens/management/hardManagement/hardManagement";
 import Management from "../../../screens/management/management";
@@ -26,5 +29,9 @@ export const screens = {
 
   // Cargor
   CargoHome,
-  AddCargo
+  AddCargo,
+  // locations
+  LocationsHomePage,
+  AddLocation,
+  LocationDetails
 }

@@ -23,6 +23,18 @@ const cargoTypes = [
   { label: 'Fragile', value: 'Fragile' },
   { label: 'General', value: 'General' },
 ];
+const priorityLevels = [
+  { label: 'High', value: 'High' },
+  { label: 'Medium', value: 'Medium' },
+  { label: 'Low', value: 'Low' },
+];
+const statusOptions = [
+  { label: 'Pending', value: 'Pending' },
+  { label: 'In Progress', value: 'In Progress' },
+  { label: 'Completed', value: 'Completed' },
+  { label: 'Cancelled', value: 'Cancelled' },
+];
+
 
 export default function AddCargo({ navigation }) {
   const [formData, setFormData] = useState({
@@ -176,23 +188,18 @@ export default function AddCargo({ navigation }) {
 
         {/* Status and Priority */}
         <Text style={styles.subTitle}>Status and Priority</Text>
-
-        <InputField
+        <Dropdown
           label="Priority Level *"
           placeholder="Medium"
+          data={priorityLevels}
           value={formData.priorityLevel}
-          onChangeText={t => onChange('priorityLevel', t)}
-          error={errors.priorityLevel}
         />
-
-        <InputField
+        <Dropdown
           label="Cargo Status *"
           placeholder="Pending"
-          value={formData.cargoStatus}
-          onChangeText={t => onChange('cargoStatus', t)}
-          error={errors.cargoStatus}
+          data={statusOptions}
+          value={formData.priorityLevel}
         />
-
         {/* Estimated Delivery Date */}
         <View style={{ marginBottom: 16 }}>
           <Text style={styles.label}>Estimated Delivery Date</Text>

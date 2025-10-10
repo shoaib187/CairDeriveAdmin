@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import DynamicTable from '../../../components/common/table/table';
-import Searchbar from '../../../components/common/searchBar/searchbar';
-import { getBatteryColor, getStatusBackground, getStatusColor } from '../../../utils/services/services';
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Header from '../../../components/common/header/header'
+import LocationStats from '../../../components/static/location/locationStats/locationStats'
+import { SPACING } from '../../../components/constants/sizes/size'
+import { getBatteryColor, getStatusBackground, getStatusColor } from '../../../utils/services/services'
+import Button from '../../../components/common/button/button'
+import DynamicTable from '../../../components/common/table/table'
+import { COLORS } from '../../../components/constants/colors/colors'
+import Searchbar from '../../../components/common/searchBar/searchbar'
+import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar'
 
-import Header from '../../../components/common/header/header';
-import { COLORS } from '../../../components/constants/colors/colors';
-import Button from '../../../components/common/button/button';
-import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar';
-import SectionInformation from '../../../components/common/sectionInformation/sectionInformation';
-
-
-const HardwareManagement = ({ navigation }) => {
+export default function LocationDetails({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleEdit = (item) => {
@@ -151,34 +145,30 @@ const HardwareManagement = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header
-        title="Hardware Management"
-        showBackButton
-        showUser={false}
-        onBackPress={() => navigation.goBack()}
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <Header onBackPress={() => navigation.goBack()} title='Location details' showBackButton showUser={false} />
+      <View style={{ padding: SPACING.md }}>
+        <LocationStats />
+      </View>
+      <FilterSearchBar title='Add location' />
+      <DynamicTable
+        data={filteredData}
+        columns={columns}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onView={onViewDetails}
+        actionButtons={[
+          { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
+          { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
+          { label: 'View', icon: 'eye', color: COLORS.primary, action: 'view' }
+        ]}
+        style={styles.table}
+        maxHeight={400}
       />
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <SectionInformation icon='memory' title='Hardware management' subtitle='Check hardware condition' />
-        <FilterSearchBar title='Add device' />
-        <DynamicTable
-          data={filteredData}
-          columns={columns}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onView={onViewDetails}
-          actionButtons={[
-            { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
-            { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
-            { label: 'View', icon: 'eye', color: COLORS.primary, action: 'view' }
-          ]}
-          style={styles.table}
-          maxHeight={400}
-        />
-      </ScrollView>
-    </View>
-  );
-};
+    </SafeAreaProvider>
+  )
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -193,9 +183,7 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
+    width: '100%'
   },
   sectionTitle: {
     fontSize: 18,
@@ -228,5 +216,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
-export default HardwareManagement;
