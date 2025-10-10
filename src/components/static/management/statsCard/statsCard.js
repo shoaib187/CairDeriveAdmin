@@ -1,28 +1,27 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../../../constants/colors/colors';
+import { FONT_STYLES, SPACING } from '../../../constants/sizes/size';
+
 
 export default function StatsCard() {
+  const stats = [
+    { number: '156', label: 'Total Assets' },
+    { number: '42', label: 'Active Drivers' },
+    { number: '89', label: 'Ongoing Routes' },
+  ];
+
   return (
     <View style={styles.statsContainer}>
-      <View style={styles.statItem}>
-        <Text style={styles.statNumber}>156</Text>
-        <Text style={styles.statLabel}>Total Assets</Text>
-      </View>
-
-      <View style={styles.statDivider} />
-
-      <View style={styles.statItem}>
-        <Text style={styles.statNumber}>42</Text>
-        <Text style={styles.statLabel}>Active Drivers</Text>
-      </View>
-
-      <View style={styles.statDivider} />
-
-      <View style={styles.statItem}>
-        <Text style={styles.statNumber}>89</Text>
-        <Text style={styles.statLabel}>Ongoing Routes</Text>
-      </View>
+      {stats.map((item, index) => (
+        <React.Fragment key={index}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{item.number}</Text>
+            <Text style={styles.statLabel}>{item.label}</Text>
+          </View>
+          {index < stats.length - 1 && <View style={styles.statDivider} />}
+        </React.Fragment>
+      ))}
     </View>
   );
 }
@@ -30,10 +29,10 @@ export default function StatsCard() {
 const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     borderRadius: 16,
-    padding: 20,
-    marginBottom: 24,
+    padding: SPACING.lg,
+    marginBottom: SPACING.xl,
     shadowColor: '#ddd',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
@@ -45,20 +44,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   statNumber: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: COLORS.secondary,
-    marginBottom: 4,
+    ...FONT_STYLES.lg,
+    color: COLORS.primary,
+    marginBottom: SPACING.xs,
   },
   statLabel: {
-    fontSize: 12,
-    color: '#666',
-    fontWeight: '500',
+    ...FONT_STYLES.sm,
+    color: COLORS.secondary,
     textAlign: 'center',
   },
   statDivider: {
     width: 1,
     backgroundColor: '#f0f0f0',
-    marginHorizontal: 10,
+    marginHorizontal: SPACING.sm,
   },
 });

@@ -1,111 +1,79 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import DriverStatItem from '../driverStatItem/driverStatItem';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from '../../../constants/colors/colors';
+
+const { width } = Dimensions.get('window');
 
 const DriverStatsCard = ({
   stats = { total: 45, available: 28, onRoute: 12 },
   style = {},
 }) => {
-  const statItems = [
-    {
-      key: 'total',
-      label: 'Total Drivers',
-      value: stats.total,
-      icon: 'people',
-      color: COLORS.primary, // Add custom color for icon background
-    },
-    {
-      key: 'available',
-      label: 'Available',
-      value: stats.available,
-      icon: 'check-circle',
-      color: COLORS.success,
-    },
-    {
-      key: 'onRoute',
-      label: 'On Route',
-      value: stats.onRoute,
-      icon: 'directions-car',
-      color: COLORS.warning,
-    },
-  ];
-
   return (
     <View style={[styles.container, style]}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <View style={[styles.headerIcon, { backgroundColor: COLORS.primary }]}>
-            <Icon name="local-shipping" size={24} color="#fff" />
-          </View>
-          <View>
-            <Text style={styles.title}>Drivers Overview</Text>
-            <Text style={styles.subtitle}>Real-time driver statistics</Text>
-          </View>
-        </View>
+      <View style={styles.headerText}>
+        <Text style={styles.title}>Drivers Overview</Text>
+        <Text style={styles.subtitle}>Real-time driver statistics</Text>
       </View>
 
-      {/* Stats Row */}
-      <View style={styles.statsRow}>
-        {statItems.map((item, index) => (
-          <DriverStatItem
-            key={item.key}
-            item={item}
-            isLast={index === statItems.length - 1}
-          />
-        ))}
+      {/* Quick Stats Bar */}
+      <View style={styles.quickStats}>
+        <View style={styles.quickStatItem}>
+          <Text style={styles.quickStatValue}>{stats.available}</Text>
+          <Text style={styles.quickStatLabel}>Total</Text>
+        </View>
+        <View style={styles.quickStatDivider} />
+        <View style={styles.quickStatItem}>
+          <Text style={styles.quickStatValue}>{stats.total - stats.available}</Text>
+          <Text style={styles.quickStatLabel}>Active</Text>
+        </View>
+        <View style={styles.quickStatDivider} />
+        <View style={styles.quickStatItem}>
+          <Text style={styles.quickStatValue}>{stats.onRoute}</Text>
+          <Text style={styles.quickStatLabel}>On Route</Text>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 24,
-    padding: 20,
-    margin: 16,
-    shadowColor: '#ddd',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    elevation: 10,
-    borderWidth: 1,
-    borderColor: COLORS.borderColor,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-    elevation: 6,
-  },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 24,
+    fontWeight: '800',
     color: '#1a1a1a',
+    marginBottom: 4,
   },
   subtitle: {
+    fontSize: 14,
+    color: '#666',
+    fontWeight: '500',
+  },
+  quickStats: {
+    flexDirection: 'row',
+    backgroundColor: COLORS.white,
+    borderRadius: 16,
+    padding: 16,
+    marginTop: 8,
+  },
+  quickStatItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  quickStatValue: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: COLORS.primary,
+    marginBottom: 4,
+  },
+  quickStatLabel: {
     fontSize: 12,
     color: '#666',
+    fontWeight: '600',
   },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+  quickStatDivider: {
+    width: 1,
+    backgroundColor: '#e0e0e0',
+    marginHorizontal: 8,
   },
 });
 

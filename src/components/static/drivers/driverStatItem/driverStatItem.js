@@ -2,13 +2,14 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+
 export default function DriverStatItem({ item, isLast }) {
   return (
     <View style={[styles.statItem, isLast && styles.lastStatItem]}>
-      <TouchableOpacity style={styles.statContent} activeOpacity={0.7}>
-        {/* Icon with colored background */}
-        <View style={[styles.statIconContainer, { backgroundColor: item.color || '#007AFF' }]}>
-          <Icon name={item.icon} size={28} color="#fff" />
+      <TouchableOpacity style={styles.statContent} activeOpacity={0.8}>
+        {/* Gradient Background Icon */}
+        <View style={styles.statIconContainer}>
+          <Icon name={item.icon} size={26} color="#fff" />
         </View>
 
         {/* Stats below the icon */}
@@ -16,6 +17,9 @@ export default function DriverStatItem({ item, isLast }) {
           <Text style={styles.statValue}>{item.value}</Text>
           <Text style={styles.statLabel}>{item.label}</Text>
         </View>
+
+        {/* Decorative dot */}
+        <View style={[styles.decorativeDot, { backgroundColor: item.color }]} />
       </TouchableOpacity>
     </View>
   );
@@ -24,37 +28,59 @@ export default function DriverStatItem({ item, isLast }) {
 const styles = StyleSheet.create({
   statItem: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     alignItems: 'center',
+    position: 'relative',
   },
   statContent: {
     alignItems: 'center',
+    padding: 12,
+    borderRadius: 16,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    marginHorizontal: 4,
+    minWidth: 100,
   },
   statIconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowRadius: 8,
+    elevation: 8,
   },
   statTextContainer: {
     alignItems: 'center',
   },
   statValue: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '800',
     color: '#1a1a1a',
+    marginBottom: 4,
   },
   statLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     color: '#666',
-    marginTop: 2,
+    textAlign: 'center',
+    lineHeight: 16,
+  },
+  decorativeDot: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    opacity: 0.6,
   },
 });

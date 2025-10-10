@@ -17,6 +17,28 @@ const ManagementStack = () => {
 
       {/* Drivers screens */}
       <Stack.Screen name="Drivers" component={screens.DriversHomePage} />
+      <Stack.Screen
+        name="AddDriver"
+        component={screens.AddDriver}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      {/* Vehicles  */}
+      <Stack.Screen name="VehiclesHomePage" component={screens.VehiclesHomePage} />
+      <Stack.Screen
+        name="AddVehicle"
+        component={screens.AddVehicle}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      {/* Cargo */}
+
+      <Stack.Screen name="CargoHomePage" component={screens.CargoHome} />
+      <Stack.Screen name="AddCargo" component={screens.AddCargo} />
     </Stack.Navigator>
   )
 }

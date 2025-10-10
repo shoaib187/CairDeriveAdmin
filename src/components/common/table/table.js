@@ -51,13 +51,13 @@ const DynamicTable = ({
       );
       return Math.min(maxCellWidth, 250); // prevent extra wide columns
     });
-    if (actions) widths.push(100); // fixed for actions
+    if (actions) widths.push(130); // fixed for actions
     return widths;
   }, [data, columns, actions]);
 
   const renderActions = (rowData, rowIndex) => (
     <View style={styles.actionContainer}>
-      {actionButtons.map((button, btnIndex) => (
+      {actionButtons?.length > 0 && actionButtons.map((button, btnIndex) => (
         <TouchableOpacity
           key={btnIndex}
           style={[styles.actionButton]}
@@ -128,8 +128,8 @@ const DynamicTable = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 12,
-    overflow: 'hidden',
+    // borderRadius: 12,
+    // overflow: 'hidden',
   },
   border: {
     borderWidth: 1,

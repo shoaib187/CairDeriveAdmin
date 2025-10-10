@@ -49,8 +49,10 @@ const Dropdown = ({
 
   const dropdownHeight = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, Math.min(data.length * 45, 200)], // auto height but max 200
+    outputRange: [0, data.length <= 5 ? data.length * 45 : 225],
+    // if 5 or fewer items, fit all; if more, max height 225 and scroll
   });
+
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -92,6 +94,8 @@ const Dropdown = ({
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
+            nestedScrollEnabled={true}
+            style={{ flexGrow: 0 }}
           />
         </Animated.View>
       )}

@@ -85,8 +85,6 @@ export default function AddDevice({ route, navigation }) {
       status: formData.isActive ? 'Active' : 'Inactive',
     };
 
-    onSave(deviceData);
-    onClose();
   };
 
   return (

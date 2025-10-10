@@ -5,13 +5,12 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { COLORS } from '../../constants/colors/colors';
 
 export default function InputField({
   label,
   value,
-  onChange,
+  onChangeText,
   placeholder,
   error,
   icon,
@@ -31,7 +30,7 @@ export default function InputField({
           multiline && styles.multilineInput
         ]}
         value={value}
-        onChangeText={onChange}
+        onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor="#8E8E93"
         keyboardType={keyboardType}

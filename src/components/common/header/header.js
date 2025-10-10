@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { COLORS } from '../../constants/colors/colors';
+import { FONT_STYLES, SPACING } from '../../constants/sizes/size';
 
 const Header = ({
   title = "Management",
@@ -16,22 +17,20 @@ const Header = ({
       <View style={styles.leftSection}>
         {showBackButton && (
           <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-            <Icon name="arrow-back" size={24} color="#fff" />
+            <Icon name="arrow-back" size={20} color={COLORS.white} />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>
       </View>
 
       {/* Right Section */}
-      <View style={styles.rightSection}>
-        {showUser && (
-          <TouchableOpacity style={styles.userButton}>
-            <View style={styles.userInitials}>
-              <Text style={styles.userInitialsText}>{userInitials}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      </View>
+      {showUser && (
+        <TouchableOpacity style={styles.userButton}>
+          <View style={styles.userInitials}>
+            <Text style={styles.userInitialsText}>{userInitials}</Text>
+          </View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -41,9 +40,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    backgroundColor: COLORS.primary
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm,
   },
   leftSection: {
     flexDirection: 'row',
@@ -51,20 +50,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginLeft: 8,
-  },
-  rightSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...FONT_STYLES.lg, // responsive + bold
+    color: COLORS.white,
+    marginLeft: SPACING.xs,
   },
   backButton: {
-    padding: 8,
+    padding: SPACING.xs,
   },
   userButton: {
-    padding: 4,
+    padding: SPACING.xs,
   },
   userInitials: {
     width: 36,
@@ -73,13 +67,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: 'rgba(255,255,255,0.5)',
   },
   userInitialsText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
+    ...FONT_STYLES.sm,
+    color: COLORS.white,
+    fontWeight: '700',
   },
 });
 

@@ -6,77 +6,68 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import DynamicTable from '../../../components/common/table/table';
-import Searchbar from '../../../components/common/searchBar/searchbar';
 import { getBatteryColor, getStatusBackground, getStatusColor } from '../../../utils/services/services';
-
 import Header from '../../../components/common/header/header';
-import { COLORS } from '../../../components/constants/colors/colors';
+import Searchbar from '../../../components/common/searchBar/searchbar';
 import Button from '../../../components/common/button/button';
+import DynamicTable from '../../../components/common/table/table';
+import { COLORS } from '../../../components/constants/colors/colors';
 
 
-const HardwareManagement = ({ navigation }) => {
+
+const CargoHome = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleEdit = (item) => {
-    navigation.navigate("AddDevice", { item });
+    navigation.navigate("AddCargo", { item });
   };
 
   const onViewDetails = (item) => {
     navigation.navigate("ViewDeviceDetails", { item });
   };
 
-  const [hardwareData, setHardwareData] = useState([
+  const [cargoData, setCargoData] = useState([
     {
-      id: 'HW001',
-      regNo: 'REG2024001',
-      groupName: 'Fleet Vehicles',
-      status: 'Active',
-      hardwareType: 'GPS Tracker',
-      lastSeen: '2 hours ago',
-      location: 'Warehouse A',
-      firmware: 'v2.1.4',
-      battery: '85%',
+      id: 'CG001',
+      cargoName: 'Electronics',
+      type: 'Fragile',
+      status: 'In Transit',
+      priority: 'High',
+      weight: '1200',
+      dimensions: '120x80x60',
     },
     {
-      id: 'HW002',
-      regNo: 'REG2024002',
-      groupName: 'Warehouse',
-      status: 'Inactive',
-      hardwareType: 'RFID Scanner',
-      lastSeen: '5 days ago',
-      location: 'Storage Room',
-      firmware: 'v1.0.2',
-      battery: '0%',
+      id: 'CG002',
+      cargoName: 'Furniture',
+      type: 'Non-Fragile',
+      status: 'Pending',
+      priority: 'Medium',
+      weight: '2500',
+      dimensions: '200x100x150',
     },
     {
-      id: 'HW003',
-      regNo: 'REG2024003',
-      groupName: 'Delivery Trucks',
-      status: 'Active',
-      hardwareType: 'Temperature Sensor',
-      lastSeen: '30 minutes ago',
-      location: 'Truck 05',
-      firmware: 'v3.2.1',
-      battery: '92%',
+      id: 'CG003',
+      cargoName: 'Pharmaceuticals',
+      type: 'Fragile',
+      status: 'Delivered',
+      priority: 'High',
+      weight: '500',
+      dimensions: '50x40x60',
     },
     {
-      id: 'HW004',
-      regNo: 'REG2024004',
-      groupName: 'Office Equipment',
-      status: 'Maintenance',
-      hardwareType: 'Barcode Printer',
-      lastSeen: '1 week ago',
-      location: 'Office Floor',
-      firmware: 'v1.5.0',
-      battery: '45%',
+      id: 'CG004',
+      cargoName: 'Clothing',
+      type: 'Non-Fragile',
+      status: 'In Transit',
+      priority: 'Low',
+      weight: '300',
+      dimensions: '80x50x40',
     },
   ]);
 
-  const basicColumns = [
-    { key: 'regNo', label: 'Reg No', width: 120 },
-    { key: 'id', label: 'ID', width: 100 },
-    { key: 'groupName', label: 'Group Name', width: 150 },
+  const columns = [
+    { key: 'cargoName', label: 'Cargo Name', width: 150 },
+    { key: 'type', label: 'Type', width: 120 },
     {
       key: 'status',
       label: 'Status',
@@ -86,50 +77,22 @@ const HardwareManagement = ({ navigation }) => {
           styles.statusBadge,
           { backgroundColor: getStatusBackground(item.status) }
         ]}>
-          <View style={[
-            styles.statusDot,
-            { backgroundColor: getStatusColor(item.status) }
-          ]} />
-          <Text style={[
-            styles.statusText,
-            { color: getStatusColor(item.status) }
-          ]}>
-            {item.status}
-          </Text>
+          <Text style={styles.statusText}>{item.status}</Text>
         </View>
       )
     },
-    { key: 'hardwareType', label: 'Hardware Type', width: 150 },
+    { key: 'priority', label: 'Priority', width: 100 },
+    { key: 'weight', label: 'Weight (kg)', width: 100 },
+    { key: 'dimensions', label: 'Dimensions (cm)', width: 120 },
   ];
 
-  const extendedColumns = [
-    ...basicColumns,
-    { key: 'location', label: 'Location', width: 130 },
-    { key: 'firmware', label: 'Firmware', width: 100 },
-    {
-      key: 'battery',
-      label: 'Battery',
-      width: 80,
-      render: (item) => (
-        <Text style={[
-          styles.batteryText,
-          { color: getBatteryColor(item.battery) }
-        ]}>
-          {item.battery}
-        </Text>
-      )
-    },
-  ];
-
-  const [showExtended, setShowExtended] = useState(false);
-  const columns = showExtended ? extendedColumns : basicColumns;
-
-  const filteredData = hardwareData.filter(item =>
-    item.regNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.hardwareType.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = cargoData.filter(item =>
+    item.cargoName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.priority.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
 
   const handleDelete = (item) => {
     Alert.alert(
@@ -141,7 +104,7 @@ const HardwareManagement = ({ navigation }) => {
           text: 'Delete',
           style: 'destructive',
           onPress: () => {
-            setHardwareData(hardwareData.filter(device => device.id !== item.id));
+            // setHardwareData(hardwareData.filter(device => device.id !== item.id));
           },
         },
       ]
@@ -151,7 +114,7 @@ const HardwareManagement = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        title="Hardware Management"
+        title="Cargo Management"
         showBackButton
         showUser={false}
         onBackPress={() => navigation.goBack()}
@@ -164,11 +127,12 @@ const HardwareManagement = ({ navigation }) => {
               Hardware Devices ({filteredData.length})
             </Text>
             <Button
-              title="Add Device"
-              onPress={() => navigation.navigate("AddDevice")}
+              title="Add Cargo"
+              onPress={() => navigation.navigate("AddCargo")}
               variant="primary"
               size='small'
               style={{ elevation: 0, borderRadius: 6 }}
+              icon={"add"}
             />
           </View>
           <DynamicTable
@@ -180,7 +144,6 @@ const HardwareManagement = ({ navigation }) => {
             actionButtons={[
               { label: 'Edit', icon: 'edit', color: '#FF9500', action: 'edit' },
               { label: 'Delete', icon: 'trash', color: '#FF3B30', action: 'delete' },
-              { label: 'View', icon: 'eye', color: COLORS.primary, action: 'view' }
             ]}
             style={styles.table}
             maxHeight={400}
@@ -240,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HardwareManagement;
+export default CargoHome;

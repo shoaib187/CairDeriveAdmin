@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MagagementCard from '../../components/static/management/magagementCard/magagementCard';
 import Header from '../../components/common/header/header';
 import StatsCard from '../../components/static/management/statsCard/statsCard';
+import { FONT_STYLES, SPACING } from '../../components/constants/sizes/size';
+import { COLORS } from '../../components/constants/colors/colors';
 
 const Management = ({ navigation }) => {
   const managementCards = [
@@ -33,7 +35,7 @@ const Management = ({ navigation }) => {
       icon: 'inventory',
       color: '#FF9500',
       gradient: ['#FF9500', '#E68500'],
-      screen: 'AssetManagement',
+      screen: 'VehiclesHomePage',
     },
     {
       id: 4,
@@ -42,7 +44,7 @@ const Management = ({ navigation }) => {
       icon: 'local-shipping',
       color: '#FF3B30',
       gradient: ['#FF3B30', '#D70015'],
-      screen: 'CargoTypeManagement',
+      screen: 'CargoHomePage',
     },
     {
       id: 5,
@@ -124,19 +126,16 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    marginBottom: 24,
+    marginBottom: SPACING.lg,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#1a1a1a',
-    marginBottom: 6,
+    ...FONT_STYLES.lg, // Responsive bold text
+    // color: COLORS.primary,
+    marginBottom: SPACING.xs,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666',
-    fontWeight: '500',
-    lineHeight: 22,
+    ...FONT_STYLES.md,
+    color: COLORS.secondary,
   },
   gridContainer: {
     flexDirection: 'row',
