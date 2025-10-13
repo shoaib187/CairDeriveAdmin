@@ -123,7 +123,7 @@ const CargoHome = ({ navigation }) => {
       />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <SectionInformation title="Cargo management" />
-        <FilterSearchBar />
+        <FilterSearchBar onAddPress={() => navigation.navigate("AddCargo")} />
         <DynamicTable
           data={filteredData}
           columns={columns}

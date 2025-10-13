@@ -96,7 +96,7 @@ export default function VehiclesHomePage({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <SectionInformation title='Assets overview' subtitle='Assets you have' />
         <VehicleCard />
-        <FilterSearchBar />
+        <FilterSearchBar onAddPress={() => navigation.navigate("AddVehicle")} />
         <DynamicTable
           data={filteredData}
           columns={columns}

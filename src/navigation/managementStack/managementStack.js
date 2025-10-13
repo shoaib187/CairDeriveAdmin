@@ -41,6 +41,10 @@ const ManagementStack = () => {
       <Stack.Screen name="LocationHomePage" component={screens.LocationsHomePage} />
       <Stack.Screen name="AddLocation" component={screens.AddLocation} />
       <Stack.Screen name="LocationDetails" component={screens.LocationDetails} />
+
+      {/* Routes */}
+      <Stack.Screen name="RoutesHomePage" component={screens.RoutesHomePage} />
+      <Stack.Screen name="AddRoute" component={screens.AddRoute} />
     </Stack.Navigator>
   )
 }

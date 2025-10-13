@@ -34,7 +34,7 @@ export default function ViewDevice({ navigation }) {
         onBackPress={() => navigation.goBack()}
         showBackButton={true}
         showUser={false}
-        title='Device Details'
+        title='Device details'
       />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Device Header Card */}

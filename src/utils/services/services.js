@@ -1,3 +1,4 @@
+export const baseUrl = `https://jms-omega.vercel.app`
 export const getStatusColor = (status) => {
   switch (status) {
     case 'Active': return '#34C759';

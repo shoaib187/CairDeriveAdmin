@@ -153,14 +153,14 @@ const HardwareManagement = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        title="Hardware Management"
+        title="Hardware management"
         showBackButton
         showUser={false}
         onBackPress={() => navigation.goBack()}
       />
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <SectionInformation icon='memory' title='Hardware management' subtitle='Check hardware condition' />
-        <FilterSearchBar title='Add device' />
+        <FilterSearchBar onAddPress={() => navigation.navigate("AddDevice")} title='Add device' />
         <DynamicTable
           data={filteredData}
           columns={columns}

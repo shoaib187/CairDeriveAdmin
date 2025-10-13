@@ -122,7 +122,7 @@ export default function DriversHomePage({ navigation }) {
       <Header showBackButton={true} title='Drivers' onBackPress={() => navigation.goBack()} />
       <SectionInformation />
       <DriverStatsCard />
-      <FilterSearchBar />
+      <FilterSearchBar onAddPress={() => navigation.navigate("AddDriver")} />
       <DynamicTable
         data={filteredData}
         columns={columns}

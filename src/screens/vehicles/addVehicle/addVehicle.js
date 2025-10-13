@@ -79,10 +79,10 @@ export default function AddVehicle({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Header showBackButton title='Add vehicle' showUser={false} onBackPress={() => navigation.goBack()} />
-      <View style={{ flex: 1, padding: 12, backgroundColor: '#fff', }}>
+      <View style={{ flex: 1, paddingHorizontal: 12, backgroundColor: '#fff', }}>
         <ScrollView
           style={styles.container}
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 10, paddingTop: 14 }}
           showsVerticalScrollIndicator={false}>
           {/* Header */}
           <View style={styles.header}>

@@ -9,6 +9,8 @@ import AddDevice from "../../../screens/management/addDevice/addDevice";
 import HardwareManagement from "../../../screens/management/hardManagement/hardManagement";
 import Management from "../../../screens/management/management";
 import ViewDevice from "../../../screens/management/viewDevice/viewDevice";
+import AddRoute from "../../../screens/routes/addRoute/addRoute";
+import RoutesHomePage from "../../../screens/routes/routesHomePage/routesHomePage";
 import AddVehicle from "../../../screens/vehicles/addVehicle/addVehicle";
 import VehiclesHomePage from "../../../screens/vehicles/vehiclesHomePage/vehiclesHomePage";
 
@@ -33,5 +35,9 @@ export const screens = {
   // locations
   LocationsHomePage,
   AddLocation,
-  LocationDetails
+  LocationDetails,
+
+  // Routes
+  RoutesHomePage,
+  AddRoute
 }

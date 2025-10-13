@@ -14,67 +14,60 @@ import { COLORS } from '../../../components/constants/colors/colors'
 import NotFound from '../../../components/static/location/notFound/notFound'
 import SectionInformation from '../../../components/common/sectionInformation/sectionInformation'
 import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar'
+import DeliveryRoutesCard from '../../../components/static/routes/deliveryRoutesCard/deliveryRoutesCard'
 
-export default function LocationsHomePage({ navigation }) {
-  // ✅ Sample dummy data
-  const [locations, setLocations] = useState([
+export default function RoutesHomePage({ navigation }) {
+
+  const [deliveryData, setDeliveryData] = useState([
     {
-      id: 'LOC001',
-      name: 'Riyadh Warehouse',
-      description: 'Main storage facility',
-      country: 'Saudi Arabia',
-      city: 'Riyadh',
-      region: 'Riyadh Region',
-      postalCode: '12345',
-      longitude: '46.6753',
-      latitude: '24.7136',
-      timezone: 'Asia/Riyadh',
-      image: 'https://ui-avatars.com/api/?name=Riyadh+Warehouse&background=0D8ABC&color=ffff',
+      id: 1,
+      title: 'Sialkot to Karachi',
+      subtitle: 'Pak Army Ordinance Delivery Route',
+      route: 'Dubai Port to Jaddah Dry Port',
+      distance: '500.0 km',
+      time: '1 min',
+      type: 'domestic'
     },
     {
-      id: 'LOC002',
-      name: 'Jeddah Distribution Center',
-      description: 'Secondary distribution point',
-      country: 'Saudi Arabia',
-      city: 'Jeddah',
-      region: 'Makkah Region',
-      postalCode: '21411',
-      longitude: '39.1979',
-      latitude: '21.4858',
-      timezone: 'Asia/Riyadh',
-      image: 'https://ui-avatars.com/api/?name=Jeddah+Center&background=0D8ABC&color=ffff',
-    },
-  ])
-
+      id: 2,
+      title: 'Jaddah to Dubai',
+      subtitle: 'Army Ordinance Delivery Route',
+      route: 'Dubai Port to Jaddah Dry Port',
+      distance: '1000.0 km',
+      time: '90000 min',
+      type: 'international'
+    }])
   // ✅ Searchbar state
   const [searchQuery, setSearchQuery] = useState('')
 
   // ✅ Filter data
   const filteredLocations = useMemo(() => {
-    return locations.filter(
+    return deliveryData.filter(
       loc =>
-        loc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        loc.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        loc.country.toLowerCase().includes(searchQuery.toLowerCase())
+        loc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        loc.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        loc.route.toLowerCase().includes(searchQuery.toLowerCase())
     )
-  }, [searchQuery, locations])
+  }, [searchQuery, deliveryData])
 
 
-  const renderLocation = ({ item }) => (
-    <LocationCard onViewDetails={() => navigation.navigate("LocationDetails")} key={item.id} location={item} />
-  )
+  const renderLocation = ({ item }) => {
+    return (
+      <DeliveryRoutesCard onViewDetails={() => navigation.navigate("LocationDetails")} key={item.id} item={item} />
+    )
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <Header
         onBackPress={() => navigation.goBack()}
-        title="Location Management"
+        title="Routes"
         showUser={false}
         showBackButton
       />
 
-      <SectionInformation title='Location Overview' />
-      <FilterSearchBar onAddPress={() => navigation.navigate("AddLocation")} />
+      <SectionInformation title='Routes Overview' />
+      <FilterSearchBar onAddPress={() => navigation.navigate("AddRoute")} />
       {/* locations data */}
       {filteredLocations?.length > 0 ? (
         <FlatList
