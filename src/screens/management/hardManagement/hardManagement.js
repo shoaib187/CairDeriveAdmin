@@ -7,12 +7,9 @@ import {
   Alert,
 } from 'react-native';
 import DynamicTable from '../../../components/common/table/table';
-import Searchbar from '../../../components/common/searchBar/searchbar';
 import { getBatteryColor, getStatusBackground, getStatusColor } from '../../../utils/services/services';
-
 import Header from '../../../components/common/header/header';
 import { COLORS } from '../../../components/constants/colors/colors';
-import Button from '../../../components/common/button/button';
 import FilterSearchBar from '../../../components/common/filterSearchBar/filterSearchBar';
 import SectionInformation from '../../../components/common/sectionInformation/sectionInformation';
 

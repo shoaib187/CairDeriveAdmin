@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import MagagementCard from '../../components/static/management/magagementCard/magagementCard';
 import Header from '../../components/common/header/header';
 import StatsCard from '../../components/static/management/statsCard/statsCard';

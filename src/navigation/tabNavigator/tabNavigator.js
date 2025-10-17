@@ -9,6 +9,7 @@ import ManagementStack from '../managementStack/managementStack';
 import Operations from '../../screens/operations/operations';
 import UserManagement from '../../screens/userManagement/userManagement';
 import Reports from '../../screens/reports/reports';
+import { UserStack } from '../userStack/userStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +63,7 @@ export const TabNavigator = () => {
       />
       <Tab.Screen
         name="Users"
-        component={UserManagement}
+        component={UserStack}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialCommunityIcons
